@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
 {
@@ -20,7 +21,7 @@ class RegisterController extends AbstractController
     /**
      * @Route("/inscription", name="register")
      */
-    public function index(Request $request)
+    public function index(Request $request, UserPasswordHasherInterface $passwordHasher)
     {
 
         $user = new User();
@@ -30,13 +31,13 @@ class RegisterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-          
-        
-    
+
+            $password = $passwordHasher->hashPassword($user,$user->getPassword()); 
+            $user->setPassword($password);
+
+
             $this->entityManager->persist($user);
             $this->entityManager->flush();
-
-
         }
 
         return $this->render('register/index.html.twig', [
