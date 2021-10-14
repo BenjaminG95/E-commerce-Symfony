@@ -21,7 +21,7 @@ class RegisterController extends AbstractController
     /**
      * @Route("/inscription", name="register")
      */
-    public function index(Request $request, UserPasswordHasherInterface $passwordHasher)
+    public function index(Request $request, UserPasswordHasherInterface $hasher)
     {
 
         $user = new User();
@@ -32,7 +32,7 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $password = $passwordHasher->hashPassword($user,$user->getPassword()); 
+            $password = $hasher->hashPassword($user,$user->getPassword()); 
             $user->setPassword($password);
 
 
