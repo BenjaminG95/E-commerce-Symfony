@@ -13,6 +13,7 @@
 
 		<!-- Bootstrap core CSS -->
 		<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+		<link rel="stylesheet" href="{{asset('assets/css/base.css')}}">
 
 		<style>
 			.bd-placeholder-img {
@@ -36,7 +37,7 @@
 	<body>
 		<header>
 			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-				<a class="navbar-brand" href="#">
+				<a class="navbar-brand mr-5" href="{{path('home')}}">
 					Mandataire Automobile
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,16 +46,28 @@
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item active">
-							<a class="nav-link" href="#">Home
-								<span class="sr-only">(current)</span>
-							</a>
+						<a class="nav-link mr-2" href="#"> Nos produits </a>
+						</li>
+							<li class="nav-item active">
+						<a class="nav-link mr-2" href="#"> Qui sommes-nous?</a>
+						</li>
+							<li class="nav-item active">
+						<a class="nav-link" href="#"> Contact</a>
 						</li>
 					</ul>
-					<form class="form-inline mt-2 mt-md-0">
-						<input class="form-control mr-sm-2" type="text" placeholder="Tapez votre recherche" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-					</form>
+
+					<div class="navbar-item-custom">
+
+					{% if app.user %}
+					<a href="{{path('account')}}">Mon compte (<small>{{app.user.firstname}}</small>)</a> | <a href="{{ path('app_logout')}}">Déconnexion</a>
+					{% else %}
+							<a href="{{path('app_login')}}">Connexion</a> | <a href="{{path('register')}}">Inscription </a>
+					{% endif %}
+
+					</div>
+				
 				</div>
+
 			</nav>
 		</header>
 
@@ -126,14 +139,15 @@
 			
             </div>
 				<!-- FOOTER -->
-				<footer class="container">
+				<footer class="footer-custom">
 					<p class="float-right">
-						<a href="#">Back to top</a>
 					</p>
-					<p>&copy; 2017-2020 Company, Inc. &middot;
+					<p>&copy; 2019-2021 Company
+					<small>
+					&middot;
 						<a href="#">Privacy</a>
 						&middot;
-						<a href="#">Terms</a>
+						<a href="#">Terms</a> </small>
 					</p>
 				</footer>
 			</main>
