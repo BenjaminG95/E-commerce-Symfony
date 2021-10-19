@@ -14,12 +14,6 @@ class HomeController extends AbstractController
      */
     public function index(SessionInterface $session): Response
     {
-
-
-
-        $cart = $session->get('cart');
-
-        dd($cart);
         return $this->render('home/index.html.twig');
     }
 }

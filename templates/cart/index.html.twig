@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier - E-Commerce-Symfony{% endblock %}
+
+{% block content %}
+<h1> Mon panier </h1>
+<hr>
+Retrouvez l'ensemble des produits que vous avez dans votre panier
+
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Produit</th>
+         <th scope="col">Produit</th>
+      <th scope="col">Quantité</th>
+      <th scope="col">Prix</th>
+     <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% set total = null %}
+  {% for product in cart %}
+    <tr>
+      <th scope="row"><img src="/uploads/{{product.product.illustration}} " alt="{{product.product.name}}" height="85px"</th>
+      <td class="pt-3">{{product.product.name}}<br/>
+      <small>{{product.product.subtitle}}</small></td>
+      <td class="pt-4">x{{product.quantity}}</td>
+      <td class="pt-4">{{(product.product.price / 100)|number_format(2, ',','.')}} €</td>
+      <td class="pt-4">{{(product.product.price * product.quantity / 100)|number_format(2, ',','.')}} €</td>
+    </tr>
+    {% set total = total + (product.product.price * product.quantity) %}
+    {% endfor %}
+  </tbody>
+</table>
+<div class="text-right">
+<b>Nombre de produit:</b> {{cart|length}} <br/>
+<b>Montant total: {{( total / 100)|number_format(2, ',','.')}} €</b>
+<a href="" class="btn btn-success btn-block mt-5" >Payer mon panier</a>
+</div>
+{% endblock %}
