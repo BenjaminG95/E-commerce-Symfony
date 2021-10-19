@@ -44,3 +44,8 @@
 .container-single-page{
 margin-top: 10em;
 }
+
+.cart-icon{
+  height: 2em; 
+  padding-left: 2em;
+}

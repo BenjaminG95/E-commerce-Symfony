@@ -7,14 +7,17 @@
 <hr>
 Retrouvez l'ensemble des produits que vous avez dans votre panier
 
+
+{% if cart|length > 0 %}
 <table class="table mt-4">
   <thead>
     <tr>
       <th scope="col">Produit</th>
-         <th scope="col">Produit</th>
+      <th scope="col">Produit</th>
       <th scope="col">Quantité</th>
       <th scope="col">Prix</th>
      <th scope="col">Total</th>
+     <th scopre ='col'></th>
     </tr>
   </thead>
   <tbody>
@@ -24,9 +27,22 @@ Retrouvez l'ensemble des produits que vous avez dans votre panier
       <th scope="row"><img src="/uploads/{{product.product.illustration}} " alt="{{product.product.name}}" height="85px"</th>
       <td class="pt-3">{{product.product.name}}<br/>
       <small>{{product.product.subtitle}}</small></td>
-      <td class="pt-4">x{{product.quantity}}</td>
+      <td class="pt-4"> 
+        <a href="{{path('decrease_product_cart', {'id': product.product.id})}}">
+           <img class="mr-1" src="{{asset('assets/img/moins.png')}}" color="red" height="18px" alt="Réduire la quantité"/>
+        </a>
+        x{{product.quantity}}
+        <a href="{{path('add_to_cart', {'id': product.product.id})}}">
+        <img class="ml-1" src="{{asset('assets/img/add.png')}}" color="red" height="18px" alt="Supprimer mon produit"/>
+        </a>
+        </td>   
       <td class="pt-4">{{(product.product.price / 100)|number_format(2, ',','.')}} €</td>
       <td class="pt-4">{{(product.product.price * product.quantity / 100)|number_format(2, ',','.')}} €</td>
+      <td class="pt-4">
+        <a href="{{path('delete_product_cart', {'id': product.product.id})}}"> 
+         <img src="{{asset('assets/img/delete.png')}}" color="red" height="18px" alt="Supprimer mon produit"/>
+        </a>
+      </td>
     </tr>
     {% set total = total + (product.product.price * product.quantity) %}
     {% endfor %}
@@ -37,4 +53,9 @@ Retrouvez l'ensemble des produits que vous avez dans votre panier
 <b>Montant total: {{( total / 100)|number_format(2, ',','.')}} €</b>
 <a href="" class="btn btn-success btn-block mt-5" >Payer mon panier</a>
 </div>
+{% else %}
+<hr>
+<p><b>Votre panier est vide.</b></p>
+<hr>
+{% endif %}
 {% endblock %}
