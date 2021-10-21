@@ -3,6 +3,7 @@
 {% block title %}Se connecter{% endblock %}
 
 {% block content %}
+<div class="block-small">
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -14,7 +15,7 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Merci de vous connecter</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
     <label for="inputEmail">Email</label>
     <input type="email" placeholder="Votre adresse Email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2" autocomplete="email" required autofocus>
     <label for="inputPassword">Mot de passe</label>
@@ -34,10 +35,11 @@
             </label>
         </div>
     #}
-    <div class="d-flex flex-row-reverse">
-    <button class="btn  btn-primary  mt-5 mb-5" type="submit">
+    <button class="btn  btn-lg btn-info btn-block mt-4" type="submit">
         Se connecter
    </button>
-   </div>
+   <hr>
+   <p>Souhaitez vous<a href="{{path('register')}}"> créer un compte </a> ?
 </form>
+</div>
 {% endblock %}

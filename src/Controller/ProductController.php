@@ -17,7 +17,8 @@ class ProductController extends AbstractController
     private $entityManager;
 
 
-    public function __construct(EntityManagerInterface $entityManager) {
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
     }
 
@@ -35,11 +36,11 @@ class ProductController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ( $form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $products = $this->entityManager->getRepository(Product::class)->findWithSearch($search);
-           // dd($search);
+            // dd($search);
 
-        }  else {
+        } else {
             $products = $this->entityManager->getRepository(Product::class)->findAll();
         }
 
@@ -49,13 +50,13 @@ class ProductController extends AbstractController
             'form' => $form->createView()
         ]);
     }
- /**
+    /**
      * @Route("/produit/{slug}", name="product")
      */
     public function show($slug)
     {
         $product = $this->entityManager->getRepository(Product::class)->findOneBy(['slug' => $slug]);
-   
+
         if (!$product) {
             return $this->redirectToRoute('products');
         }

@@ -13,11 +13,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
 {
-        private $entityManager;
+    private $entityManager;
 
-        public function __construct(EntityManagerInterface $entityManager) {
-            $this->entityManager = $entityManager;
-        }
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
     /**
      * @Route("/inscription", name="register")
      */
@@ -32,7 +33,7 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $password = $hasher->hashPassword($user,$user->getPassword()); 
+            $password = $hasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
 
 

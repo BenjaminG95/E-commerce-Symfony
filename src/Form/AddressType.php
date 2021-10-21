@@ -22,7 +22,7 @@ class AddressType extends AbstractType
                     'placeholder' => 'Entrez le nom que vous souhaitez donner à votre adresse',
                 ]
             ])
-            ->add('firstname' , TextType::class, [
+            ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
                 'attr' => [
                     'placeholder' => 'Entrez votre prénom',
@@ -66,6 +66,7 @@ class AddressType extends AbstractType
             ])
             ->add('company', TextType::class, [
                 'label' => 'Société (facultatif)',
+                'required' => false,
                 'attr' => [
                     'placeholder' => ' Entrez le nom de votre société (facultatif)',
                 ]
@@ -75,8 +76,7 @@ class AddressType extends AbstractType
                 'attr' => [
                     'class' => 'btn-block btn-info mt-5',
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

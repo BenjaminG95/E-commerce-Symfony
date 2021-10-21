@@ -36,7 +36,7 @@ class ChangePasswordType extends AbstractType
                     'placeholder' => 'Merci de saisir votre mot de passe atuel '
                 ]
             ])
-            
+
             ->add('new_password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
@@ -63,11 +63,7 @@ class ChangePasswordType extends AbstractType
                 'row_attr' => [
                     'class' => 'd-flex flex-row-reverse'
                 ]
-            ]);
-
-            ;
-
-            
+            ]);;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

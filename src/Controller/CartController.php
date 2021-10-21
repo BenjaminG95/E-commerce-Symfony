@@ -13,11 +13,12 @@ class CartController extends AbstractController
 {
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager) {
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
     }
 
-     /**
+    /**
      * @Route("/mon-panier", name="cart")
      */
 
@@ -29,14 +30,14 @@ class CartController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * @Route("/cart/add/{id}", name="add_to_cart")
      */
     public function add(Cart $cart, $id)
     {
         $cart->add($id);
 
-       return $this->redirectToRoute('cart');
+        return $this->redirectToRoute('cart');
     }
 
     /**
@@ -47,9 +48,9 @@ class CartController extends AbstractController
     {
         $cart->remove();
 
-       return $this->redirectToRoute('products');
+        return $this->redirectToRoute('products');
     }
-     /**
+    /**
      * @Route("/cart/delete/{id}", name="delete_product_cart")
      */
     public function delete(Cart $cart, $id)
@@ -59,7 +60,7 @@ class CartController extends AbstractController
         return $this->redirectToRoute('cart');
     }
 
-     /**
+    /**
      * @Route("/cart/decrease/{id}", name="decrease_product_cart")
      */
     public function decrease(Cart $cart, $id)
@@ -68,6 +69,4 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('cart');
     }
-
-
 }
